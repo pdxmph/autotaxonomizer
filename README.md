@@ -6,6 +6,12 @@ If an article is deemed unclassifiable, the script logs it and then passes it th
 
 ## Setup
 
+We need a few gems:
+
+* spreadsheet 
+* sanitize & readability to clean up the content for more accurate keyword searches
+* summarize to look for interesting words in articles we can't classify from our keyword list
+
 Some variables up front:
 
 * test -- this will limit the output to _n_ articles

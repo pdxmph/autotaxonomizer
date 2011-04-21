@@ -9,7 +9,7 @@ require "summarize"
 # set this to some value greater than 0 to limit output to n rows
 test = 50
 
-# to prefix the output
+# to prefix the output (e.g. 'esp' for 'eSecurityPlanet')
 site_abbreviation = "esp"
 
 # array of words we don't want to count or find
