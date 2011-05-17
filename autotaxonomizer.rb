@@ -2,11 +2,11 @@
 
 =begin
  auto taxonomizer v 0.2
-
  See README.md for required libraries and setup instructions
  
-=end
+ If the summarize gem is too much of a hassle to build, check out the unsummarized branch, which has less fussy dependencies
 
+=end
 
 require "rubygems"
 require "spreadsheet"
