@@ -15,7 +15,7 @@ require "readability"
 require "progress_bar"
 
 # set this to some value greater than 0 to limit output to n rows
-test = 100
+test = 0
 
 # to prefix the output (e.g. 'esp' for 'eSecurityPlanet')
 site_abbreviation = "sbc"
