@@ -1,30 +1,45 @@
 #!/usr/bin/ruby
 
+=begin
+ auto taxonomizer v 0.2
+
+ See README.md for required libraries and setup instructions
+ 
+=end
+
+
 require "rubygems"
 require "spreadsheet"
 require "sanitize"
 require "readability"
+require "progress_bar"
 require "summarize"
 
 # set this to some value greater than 0 to limit output to n rows
 test = 0
 
-
 # to prefix the output (e.g. 'esp' for 'eSecurityPlanet')
-site_abbreviation = "esp"
+site_abbreviation = "sbc"
+
+# set up a filter path to only gather articles from a given container, set to "unfiltered" to pull in everything
+
+filter_path = "unfiltered"
+
+# output filename
+output_filename = File.dirname(__FILE__) + "/#{site_abbreviation}_remapped_articles-test.xls"
 
 # to designate Old Site
-old_site = "http://esecurityplanet.com"
+old_site = "http://www.smallbusinesscomputing.com"
 
 # to designate CE site
-ce_site = "http://esecurityplanet.com"
+ce_site = "http://www.smallbusinesscomputing.com"
 
 # array of words we don't want to count or find
-stop_words = ["security"]
+stop_words = []
 
-# the spreadsheet we'll read
+# the spreadsheets we'll read, name these using the "site_abbreviation" variable 
+
 article_spreadsheet = File.dirname(__FILE__) + "/#{site_abbreviation}_articles.xls"
-
 mapping_spreadsheet = File.dirname(__FILE__) + "/#{site_abbreviation}_mappings.xls"
 
 # read keyword/container mappings here
@@ -34,6 +49,15 @@ keyword_sheet = keyword_book.worksheet 0
 # read in article data from here
 article_book = Spreadsheet.open(article_spreadsheet)
 article_sheet = article_book.worksheet 0
+
+# set up the progress bar 
+if test > 0
+  progress_length = test
+else
+  progress_length = article_sheet.dimensions[1] # get the number of filled rows
+end
+
+bar = ProgressBar.new(progress_length)
 
 # store output here
 output_book = Spreadsheet::Workbook.new
@@ -122,6 +146,10 @@ article_sheet.each 1 do |row|
   # clean out the whitespace
   paths.each {|p| p.strip! }
 
+  next unless paths.include?(filter_path) || filter_path == "unfiltered"
+
+
+
   #  puts title
 
   # sanitize the markup in the body
@@ -158,7 +186,7 @@ article_sheet.each 1 do |row|
 
     # loop through each keyword in the hash's value array
     keywords.each do |kw|
-      keyword = kw.to_s
+      keyword = kw.to_s.downcase
 
       elements.each do |e|
         if e.include?(keyword) && !hit_cats.include?(cat) && hit_cats.size < 4
@@ -170,15 +198,16 @@ article_sheet.each 1 do |row|
     end
 
 
-   
+
 
   end
 
- # write out whatever we found in the official CATT format to the catt_sheet
+  # write out whatever we found in the official CATT format to the catt_sheet
 
   unless hit_cats.size == 0
 
     paths.each do |path|
+      next unless path == filter_path || filter_path == "unfiltered"
       hit_cats.each do |category|
         catt_sheet.row(catt_sheet_row).concat [cdev_id,"#{old_site}#{path}",ce_site,category]
         catt_sheet_row +=1
@@ -200,8 +229,13 @@ article_sheet.each 1 do |row|
     end
   end
 
+
+  # notch the progress bar by 1
+  bar.increment!
+
   # move on to the next row
   output_row += 1
+
 end
 
 
@@ -219,4 +253,4 @@ freq_table.sort{|k,v| v[1]<=>k[1]}.each { |elem|
 
 
 # write the spreadsheet
-output_book.write File.dirname(__FILE__) + "/#{site_abbreviation}_remapped_articles.xls"
+output_book.write output_filename
