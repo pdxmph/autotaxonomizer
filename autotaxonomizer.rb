@@ -25,7 +25,7 @@ site_abbreviation = "sbc"
 filter_path = "unfiltered"
 
 # output filename
-output_filename = File.dirname(__FILE__) + "/#{site_abbreviation}_remapped_articles-test.xls"
+output_filename = File.dirname(__FILE__) + "/#{site_abbreviation}_remapped_articles.xls"
 
 # to designate Old Site
 old_site = "http://www.smallbusinesscomputing.com"
