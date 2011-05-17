@@ -1,4 +1,4 @@
-# Autotaxonomizer
+# Autotaxonomizer (Non-Summarized Version)
 
 A simple script that reads in a spreadsheet of categories and their associated keywords and classifies the content it finds by checking hed, dek and body for occurrences of the keywords.
 
@@ -12,9 +12,6 @@ We need a few gems:
 `gem install sanitize`  
 `gem install ruby-readability`  
 `gem install progress_bar`  
-`gem install summarize`  
-
-summarize gem requires a working installation of libots: <http://libots.sourceforge.net/>
 
 
 Some variables up front:
