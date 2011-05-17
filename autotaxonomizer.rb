@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 
 =begin
- auto taxonomizer v 0.2
+ auto taxonomizer non-summarized version v 0.2
 
  See README.md for required libraries and setup instructions
  
@@ -13,10 +13,9 @@ require "spreadsheet"
 require "sanitize"
 require "readability"
 require "progress_bar"
-require "summarize"
 
 # set this to some value greater than 0 to limit output to n rows
-test = 0
+test = 100
 
 # to prefix the output (e.g. 'esp' for 'eSecurityPlanet')
 site_abbreviation = "sbc"
@@ -65,7 +64,6 @@ output_sheet = output_book.create_worksheet :name => "Mappings"
 
 # log articles that don't have any hits
 nohit_sheet = output_book.create_worksheet :name => "No Hits"
-freq_table_sheet = output_book.create_worksheet :name => "Candidates"
 
 # set up the title row for the output sheet
 output_sheet.row(0).concat ["CDEV ID","Title","Mapped Container 1","Mapped Container 2","Mapped Container 3"]
@@ -155,10 +153,6 @@ article_sheet.each 1 do |row|
   # sanitize the markup in the body
   cleaned_text = Sanitize.clean(Readability::Document.new(row[5]).content)
 
-  # get some summary word candidates
-  raw_topics = cleaned_text.summarize(:topics => true)[1]
-  possible_topics = raw_topics.split(",")
-
   # clean out our stopwords list
   stop_words.each do |sw|
     possible_topics.delete(sw)
@@ -224,9 +218,6 @@ article_sheet.each 1 do |row|
     i = 1
     nohit_sheet.row(nohit_row)[0] = title
     nohit_row +=1
-    possible_topics.each do |pt|
-      freq_table[pt] += 1
-    end
   end
 
 
@@ -237,19 +228,6 @@ article_sheet.each 1 do |row|
   output_row += 1
 
 end
-
-
-
-# generate the word candidates tab (sorting the hash of likely keywords)
-freq_row = 0
-
-freq_table.sort{|k,v| v[1]<=>k[1]}.each { |elem|
-  freq_table_sheet.row(freq_row)[0] = elem[0]
-  freq_table_sheet.row(freq_row)[1] = elem[1]
-  freq_row +=1
-}
-
-
 
 
 # write the spreadsheet
