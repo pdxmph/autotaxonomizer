@@ -8,9 +8,14 @@ If an article is deemed unclassifiable, the script logs it and then passes it th
 
 We need a few gems:
 
-* spreadsheet 
-* sanitize & readability to clean up the content for more accurate keyword searches
-* summarize to look for interesting words in articles we can't classify from our keyword list
+`gem install spreadsheet`  
+`gem install sanitize`  
+`gem install ruby-readability`  
+`gem install progress_bar`  
+`gem install summarize`  
+
+summarize gem requires a working installation of libots: <http://libots.sourceforge.net/>
+
 
 Some variables up front:
 
