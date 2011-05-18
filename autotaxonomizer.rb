@@ -7,7 +7,6 @@
  
 =end
 
-
 require "rubygems"
 require "spreadsheet"
 require "sanitize"

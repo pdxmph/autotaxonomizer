@@ -41,13 +41,11 @@ Both the article file and mapping file should go in the same directory as the sc
 
 ## Run
 
-Run the script. When it's done, look for `#{site_prefix}_remapped_articles.xls` in the directory.
+Run the script. A progress bar indicates how far along the process is. When it's done, look for `#{site_prefix}_remapped_articles.xls` in the directory.
 
-The spreadsheet should have four tabs:
+The spreadsheet should have three tabs:
 
 * Mappings: The list of articles with up to three mapped categories for each
 * No Hits: Articles that didn't have any keywords from any category
-* Candidates: A list of potentially interesting words from articles in the No Hits list
 * CATT Mappings: The official CATT migration format 
 
-Use the "Candidates" tab to refine the keywords and re-run the script. 
