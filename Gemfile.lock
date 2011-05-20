@@ -1,0 +1,33 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    fattr (2.2.0)
+    highline (1.6.2)
+    nokogiri (1.4.4)
+    options (2.3.0)
+      fattr
+    progress_bar (0.3.4)
+      highline (~> 1.6.1)
+      options (~> 2.3.0)
+    rake (0.9.0)
+    rake-compiler (0.7.8)
+      rake
+    ruby-ole (1.2.11.1)
+    ruby-readability (0.2.3)
+      nokogiri (>= 1.4.2)
+    sanitize (2.0.1)
+      nokogiri (~> 1.4.4)
+    spreadsheet (0.6.5.4)
+      ruby-ole (>= 1.0)
+    summarize (1.0.3)
+      rake-compiler
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  progress_bar
+  ruby-readability
+  sanitize
+  spreadsheet
+  summarize
