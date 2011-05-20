@@ -4,6 +4,8 @@ A simple script that reads in a spreadsheet of categories and their associated k
 
 If an article is deemed unclassifiable, the script logs it and then passes it through the summarize gem to look for interesting words, which are placed in a frequency table for further refinement of the keyword list.
 
+__Note:__ This version is incomplete. Please check out the master branch of this project to get a version that can search article bodies and suggest keywords to refine classification.
+
 ## Setup
 
 We need a few gems:
