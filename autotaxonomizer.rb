@@ -9,6 +9,9 @@
 =end
 
 require "rubygems"
+# require "bundler/setup"
+# Bundler.require(:default)
+
 require "spreadsheet"
 require "sanitize"
 require "readability"
@@ -16,7 +19,7 @@ require "progress_bar"
 require "summarize"
 
 # set this to some value greater than 0 to limit output to n rows
-test = 0
+test = 50
 
 # to prefix the output (e.g. 'esp' for 'eSecurityPlanet')
 site_abbreviation = "sbc"
