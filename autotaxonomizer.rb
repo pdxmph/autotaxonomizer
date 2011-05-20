@@ -9,9 +9,6 @@
 =end
 
 require "rubygems"
-# require "bundler/setup"
-# Bundler.require(:default)
-
 require "spreadsheet"
 require "sanitize"
 require "readability"
