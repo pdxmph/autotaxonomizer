@@ -10,7 +10,7 @@
 
 `sudo apt-get install rubygems  `
 
-`sudo apt-get install libxml2  `
+`sudo apt-get install libxml2-dev  `
 
 `sudo apt-get install libxslt-dev  `
 
